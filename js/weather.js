@@ -18,8 +18,8 @@ var weather = (function($, google, moment) {
 
         $.getJSON(api_call, function(forecast) {
             var currentDate = new moment(forecast.currently.time * 1000);
-            $('#app').append('<p>'  + currentDate.format('YYYY/MM/DD') + '</strong></h3>');
-            $('#app').append('<p>'  + forecast.currently.temperature + "˚F " + forecast.currently.summary + '</strong></h3>');
+            $('#app').append(' </br> The time is <strong>'  + currentDate.format('YYYY/MM/DD h:mm:ss a') + '</strong>.');
+            $('#app').append(' </br> The weather is <strong>'  + forecast.currently.temperature + "˚F, " + forecast.currently.summary.toLowerCase() + '</strong>.');
         });
     }
 
@@ -44,8 +44,8 @@ var weather = (function($, google, moment) {
                     location = lat + ', ' + long;
                 }
 
-                $('#app').append('<p>This is ' + location);
-                weatherReport(lat, long);
+                $('#app').append('This is the weather for ' + location + "." );
+                weatherReport(lat, long)
                 $('#refresh').append('<button id="back">New Forecast</button>');
 
             });
