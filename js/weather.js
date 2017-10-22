@@ -3,12 +3,12 @@
 //Get Weather button event
 //interaction with DarkSky
 var weather = (function($, google, moment) {
-    // "globals" 
-    var lat; 
-    var long; 
-    var city_name; 
-    var location; 
-    
+    // "globals"
+    var lat;
+    var long;
+    var city_name;
+    var location;
+
     function weatherReport(latitude, longitude) {
         var apiKey = '419d6044ee82c0f5f8bd391e0ec3834e',
             url = 'https://api.darksky.net/forecast/',
@@ -18,9 +18,8 @@ var weather = (function($, google, moment) {
 
         $.getJSON(api_call, function(forecast) {
             var currentDate = new moment(forecast.currently.time * 1000);
-            $('#app').append('<p>' + currentDate.format() + '</p>');
-            $('#app').append('<p> The temperature is ' + forecast.currently.temperature + '</p>');
-            $('#app').append('<p> The weather is ' + forecast.currently.summary + '</p>');
+            $('#app').append('<p>'  + currentDate.format('YYYY/MM/DD') + '</strong></h3>');
+            $('#app').append('<p>'  + forecast.currently.temperature + "˚F " + forecast.currently.summary + '</strong></h3>');
         });
     }
 
@@ -33,7 +32,7 @@ var weather = (function($, google, moment) {
         // then continue with the code. Otherwise report error to user.
         if (lat && long !== '') {
 
-            // prevent the default event 
+            // prevent the default event
             e.preventDefault();
 
             // Fade the form out, submit the weather request,
@@ -44,6 +43,7 @@ var weather = (function($, google, moment) {
                 } else {
                     location = lat + ', ' + long;
                 }
+
                 $('#app').append('<p>This is ' + location);
                 weatherReport(lat, long);
                 $('#refresh').append('<button id="back">New Forecast</button>');
